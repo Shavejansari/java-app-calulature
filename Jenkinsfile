@@ -55,17 +55,4 @@ pipeline {
             }
         }
     }
-
-    post {
-        success {
-            script {
-                currentBuild.result = 'SUCCESS'
-            }
-        }
-        failure {
-            script {
-                currentBuild.result = 'FAILURE'
-            }
-        }
-    }
 }
