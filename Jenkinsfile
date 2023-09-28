@@ -48,9 +48,6 @@ pipeline {
                         subject: "Pipeline Status: ${currentBuild.result}",
                         body: """<p>Your Jenkins pipeline has completed with the following status: ${currentBuild.result}</p>""",
                         to: 'mohd@arintech.in', // Replace with the email address of the recipient
-                        cc: 'shavejmohd30@gmail.com', // Optional: CC addresses
-                        bcc: '', // Optional: BCC addresses
-                        replyTo: '', // Optional: Reply-To address
                         mimeType: 'text/html' // Set to 'text/plain' for plain text emails
                     )
                 }
