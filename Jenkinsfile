@@ -26,17 +26,16 @@ pipeline {
                 sh 'mvn test'
             }
         }
-        stage('Code Quality Check') {
+        stage('Code Quality Check SonarQube') {
             steps {
                 script {
                     env.SONAR_TOKEN = '3c415559dbef1aeed2f4b00202f8c7e3c2d0ac58'
-                    sh 'pwd'
                     echo "SONAR_TOKEN: ${env.SONAR_TOKEN}"
                     sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=shavej-devops'
                 }
             }
         }
-        stage('Notify Stakeholders') {
+        stage('Email notification') {
             steps {
                 script {
                     emailext(
