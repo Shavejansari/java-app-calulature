@@ -40,7 +40,7 @@ pipeline {
         stage('Artifact Upload') {
             steps {
                 script {
-                    sh 'curl -umohd@arintech.in:cmVmdGtuOjAxOjE3Mjc0Mzk3ODM6ZHVzUVdCclRqaFh2dXlFejJMVnpQNE5uRWFh -T Calculator-1.0-SNAPSHOT.jar "https://mohd.jfrog.io/artifactory/artifactory-build-info/”'
+                    sh 'curl -umohd@arintech.in:cmVmdGtuOjAxOjE3Mjc0Mzk3ODM6ZHVzUVdCclRqaFh2dXlFejJMVnpQNE5uRWFh -T /var/lib/jenkins/workspace/javaAppPipeline/target/Calculator-1.0-SNAPSHOT.jar "https://mohd.jfrog.io/artifactory/artifactory-build-info/”'
                 }
             }
         }
