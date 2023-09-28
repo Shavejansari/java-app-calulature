@@ -34,6 +34,7 @@ pipeline {
                 sh 'export SONAR_TOKEN=3c415559dbef1aeed2f4b00202f8c7e3c2d0ac58'
                 sh 'echo $SONAR_TOKEN'
                 sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=shavej-devops'
+                
             }
         }
     }
