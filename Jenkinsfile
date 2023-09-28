@@ -33,6 +33,14 @@ pipeline {
                     echo "SONAR_TOKEN: ${env.SONAR_TOKEN}"
                     sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=shavej-devops'
                     sh 'pwd'
+                    sh 'cd /var/lib/jenkins/workspace/javaAppPipeline/target'
+                }
+            }
+        }
+        stage('Artifact Upload') {
+            steps {
+                script {
+                    sh 'curl -umohd@arintech.in:cmVmdGtuOjAxOjE3Mjc0Mzk3ODM6ZHVzUVdCclRqaFh2dXlFejJMVnpQNE5uRWFh -T Calculator-1.0-SNAPSHOT.jar "https://mohd.jfrog.io/artifactory/artifactory-build-info/”'
                 }
             }
         }
