@@ -45,13 +45,10 @@ pipeline {
             steps {
                 script {
                     emailext(
-                        to: 'shavejkhan673@gmail.com',
-                        subject: 'Pipeline Status',
-                        body: '''Hi Mohd,
-                        Greetings of the day
-                        Your Jenkins pipeline has completed with the following status
-                        Regards
-                        Mohd Shavej'''
+                        subject: "Pipeline Status: ${currentBuild.result}",
+                        body: """<p>Your Jenkins pipeline has completed with the following status: ${currentBuild.result}</p>""",
+                        to: 'shavejkhan673@gmail.com', // Replace with the email address of the recipient
+                        mimeType: 'text/html' // Set to 'text/plain' for plain text emails
                     )
                 }
             }
