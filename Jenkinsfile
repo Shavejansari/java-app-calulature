@@ -44,7 +44,7 @@ pipeline {
         stage('Notify Stakeholders') {
             steps {
                 script {
-                    emailtext(
+                    emailext(
                         to: 'mohd@arintech.in',
                         subject: 'Pipeline Status',
                         body: '''Hi Mohd,
