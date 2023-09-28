@@ -32,7 +32,7 @@ pipeline {
                     env.SONAR_TOKEN = '3c415559dbef1aeed2f4b00202f8c7e3c2d0ac58'
                     echo "SONAR_TOKEN: ${env.SONAR_TOKEN}"
                     sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=shavej-devops'
-                    sh 'pwd'
+                    sh 'ls'
                     sh 'cd /var/lib/jenkins/workspace/javaAppPipeline/target'
                 }
             }
