@@ -45,13 +45,30 @@ pipeline {
             steps {
                 script {
                     emailext(
-                         mail bcc: '', body: '''Hi Mohd,
-                         Greetings of the day
-                         Your Jenkins pipeline has completed with the following status
-                         Regards
-                         Mohd Shavej''', cc: '', from: '', replyTo: '', subject: 'Pipeline Status', to: 'mohd@arintech.in'
-                        )
-                    }
+                        bcc: '',
+                        body: '''Hi Mohd,
+                        Greetings of the day
+                        Your Jenkins pipeline has completed with the following status
+                        Regards
+                        Mohd Shavej''',
+                        cc: '',
+                        subject: 'Pipeline Status',
+                        to: 'mohd@arintech.in'
+                    )
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            script {
+                currentBuild.result = 'SUCCESS'
+            }
+        }
+        failure {
+            script {
+                currentBuild.result = 'FAILURE'
             }
         }
     }
