@@ -15,7 +15,7 @@ pipeline {
                     if (maven_exists == true) {
                         echo "Skipping maven install - already exists"
                     } else {
-                        sh ‘sudo apt-get  update -y’
+                        sh 'sudo apt-get  update -y'
                         sh 'sudo apt install -y wget tree unzip openjdk-11-jdk maven'
                     }
                 }
@@ -29,3 +29,15 @@ pipeline {
                 sh 'mvn test'
             }
         }
+        stage('Code Quality Check') {
+            steps {
+                script {
+                    env.SONAR_TOKEN = '3c415559dbef1aeed2f4b00202f8c7e3c2d0ac58'
+                    sh 'env'
+                    echo "SONAR_TOKEN: ${env.SONAR_TOKEN}"
+                    sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=shavej-devops'
+                }               
+            }
+        }
+    }
+}
