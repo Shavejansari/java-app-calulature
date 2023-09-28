@@ -44,22 +44,19 @@ pipeline {
         stage('Notify Stakeholders') {
             steps {
                 script {
-                    emailext(
-                        bcc: '',
+                    emailtext(
+                        to: 'mohd@arintech.in',
+                        subject: 'Pipeline Status',
                         body: '''Hi Mohd,
                         Greetings of the day
                         Your Jenkins pipeline has completed with the following status
                         Regards
-                        Mohd Shavej''',
-                        cc: '',
-                        subject: 'Pipeline Status',
-                        to: 'mohd@arintech.in'
+                        Mohd Shavej'''
                     )
                 }
             }
         }
     }
-
     post {
         success {
             script {
