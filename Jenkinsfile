@@ -31,11 +31,11 @@ pipeline {
         }
         stage('Code Quality Check') {
             steps {
-                env.SONAR_TOKEN = '3c415559dbef1aeed2f4b00202f8c7e3c2d0ac58'
-                sh 'env'
-                echo "SONAR_TOKEN: ${env.SONAR_TOKEN}"
-                sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=shavej-devops'
-                
+                script {
+                    env.SONAR_TOKEN = '3c415559dbef1aeed2f4b00202f8c7e3c2d0ac58'
+                    sh 'env'
+                    echo "SONAR_TOKEN: ${env.SONAR_TOKEN}"
+                }               
             }
         }
     }
