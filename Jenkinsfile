@@ -1,69 +1,64 @@
 pipeline {
     agent any
-
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
-
         stage('Installing Java and Maven') {
             steps {
-                // ... (your existing installation steps)
-            }
-        }
-
-        stage('Compiling and Running Test Cases') {
-            steps {
-                // ... (your existing compilation and testing steps)
-            }
-        }
-
-        stage('Code Quality Check') {
-            steps {
-                // ... (your existing SonarQube analysis steps)
-            }
-        }
-
-        stage('Artifact Upload') {
-            steps {
                 script {
-                    def username = 'mohd@arintech.in'
-                    def apiKey = 'cmVmdGtuOjAxOjE3Mjc0MjU0OTA6Ym96WExQMHROY05pTEZRalk1Y1RockVva2p2'
-                    def sourceFilePath = 'Calculator-1.0-SNAPSHOT.jar'
-                    def targetFilePath = 'default-generic-local/Calculator-1.0-SNAPSHOT.jar'
-                    def artifactoryUrl = 'https://mohd.jfrog.io/artifactory/'
-
-                    def curlCommand = """
-                        curl -u ${username}:${apiKey} -T ${sourceFilePath} "${artifactoryUrl}${targetFilePath}"
-                    """
-
-                    if (isUnix()) {
-                        sh curlCommand
+                    def maven_exists = fileExists '/usr/share/maven'
+                    if (maven_exists == true) {
+                        echo "Skipping maven install - already exists"
                     } else {
-                        bat curlCommand
+                        sh 'sudo apt-get update -y'
+                        sh 'sudo apt install -y wget tree unzip openjdk-11-jdk maven'
                     }
                 }
             }
         }
-
+        stage('Compiling and Running Test Cases') {
+            steps {
+                sh 'mvn clean'
+                sh 'mvn compile'
+                sh 'mvn test'
+            }
+        }
+        stage('Code Quality Check') {
+            steps {
+                script {
+                    env.SONAR_TOKEN = '3c415559dbef1aeed2f4b00202f8c7e3c2d0ac58'
+                    sh 'env'
+                    echo "SONAR_TOKEN: ${env.SONAR_TOKEN}"
+                    sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=shavej-devops'
+                }
+            }
+        }
+        stage('Artifact Upload') {
+            steps {
+                script {
+                    sh 'pwd'
+                }
+            }
+        }
         stage('Notify Stakeholders') {
             steps {
                 script {
                     emailext(
-                        to: 'mohd@arintech.in',
+                        to: 'shavejkhan673@gmail.com',
                         subject: 'Pipeline Status',
                         body: '''Hi Mohd,
                         Greetings of the day
                         Your Jenkins pipeline has completed with the following status
                         Regards
-                        Mohd Shavej''')
+                        Mohd Shavej'''
+                    )
                 }
             }
         }
     }
-
     post {
         success {
             script {
