@@ -49,8 +49,16 @@ pipeline {
         stage('Email notification') {
             steps {
                 script {
-                    emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: "Test'ss"
-                    }
+                    emailext(
+                    to: 'shavejkhan673@gmail.com',
+                        subject: 'Pipeline Status',
+                        body: '''Hi Mohd,
+                        Greetings of the day
+                        Your Jenkins pipeline has completed with the following status
+                        Regards
+                        Mohd Shavej'''
+                        )
+                }
             }
         }
     }
