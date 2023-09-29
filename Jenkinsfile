@@ -33,16 +33,17 @@ pipeline {
                     echo "SONAR_TOKEN: ${env.SONAR_TOKEN}"
                     sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=shavej-devops'
                     sh 'ls'
-                    dir('/var/lib/jenkins/workspace/javaAppPipeline/target')
-                    // sh 'cd /var/lib/jenkins/workspace/javaAppPipeline/target'
-                    sh 'ls'
-                }
+                 }
             }
         }
         stage('Artifact Upload') {
              steps {
                  script {
-                     sh 'curl -umohd@arintech.in:cmVmdGtuOjAxOjE3Mjc0OTY3MzQ6N0dBODFYTjYzYnpnM1A5Q1V2bFcwSWdLa2RU -T /var/lib/jenkins/workspace/javaAppPipeline/target/Calculator-1.0-SNAPSHOT.jar "https://mohd.jfrog.io/artifactory/default-generic-local/"'
+                     dir('/var/lib/jenkins/workspace/javaAppPipeline/target') {
+                    // sh 'cd /var/lib/jenkins/workspace/javaAppPipeline/target'
+                    sh 'ls'
+                    }
+                     // sh 'curl -umohd@arintech.in:cmVmdGtuOjAxOjE3Mjc0OTY3MzQ6N0dBODFYTjYzYnpnM1A5Q1V2bFcwSWdLa2RU -T /var/lib/jenkins/workspace/javaAppPipeline/target/Calculator-1.0-SNAPSHOT.jar "https://mohd.jfrog.io/artifactory/default-generic-local/"'
                  }
              }
         }
