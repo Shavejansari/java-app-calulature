@@ -39,11 +39,10 @@ pipeline {
         stage('Artifact Upload') {
              steps {
                  script {
-                     dir('/var/lib/jenkins/workspace/javaAppPipeline/target') {
-                    // sh 'cd /var/lib/jenkins/workspace/javaAppPipeline/target'
+                    dir('/var/lib/jenkins/workspace/javaAppPipeline/target') {
                     sh 'ls'
-                    }
-                     // sh 'curl -umohd@arintech.in:cmVmdGtuOjAxOjE3Mjc0OTY3MzQ6N0dBODFYTjYzYnpnM1A5Q1V2bFcwSWdLa2RU -T /var/lib/jenkins/workspace/javaAppPipeline/target/Calculator-1.0-SNAPSHOT.jar "https://mohd.jfrog.io/artifactory/default-generic-local/"'
+                    sh 'curl -umohd@arintech.in:cmVmdGtuOjAxOjE3Mjc0OTY3MzQ6N0dBODFYTjYzYnpnM1A5Q1V2bFcwSWdLa2RU -T /var/lib/jenkins/workspace/javaAppPipeline/target/Calculator-1.0-SNAPSHOT.jar "https://mohd.jfrog.io/artifactory/default-generic-local/"'
+                    }     
                  }
              }
         }
