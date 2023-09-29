@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout') {
+        stage('Checkout SCM') {
             steps {
                 checkout scm
             }
@@ -36,7 +36,7 @@ pipeline {
                  }
             }
         }
-        stage('Artifact Upload') {
+        stage('Artifact Upload to JFrog') {
              steps {
                  script {
                     dir('/var/lib/jenkins/workspace/javaAppPipeline/target') {
@@ -50,7 +50,7 @@ pipeline {
             steps {
                 script {
                     emailext(
-                        to: 'shavejkhan673@gmail.com',
+                        to: 'thakuranoop54321@gmail.com',
                         subject: 'Pipeline Status',
                         body: '''Hi Mohd,
                         Greetings of the day
