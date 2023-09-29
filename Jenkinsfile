@@ -33,7 +33,8 @@ pipeline {
                     echo "SONAR_TOKEN: ${env.SONAR_TOKEN}"
                     sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=shavej-devops'
                     sh 'ls'
-                    sh 'cd /var/lib/jenkins/workspace/javaAppPipeline/target'
+                    dir('/var/lib/jenkins/workspace/javaAppPipeline/target')
+                    // sh 'cd /var/lib/jenkins/workspace/javaAppPipeline/target'
                     sh 'ls'
                 }
             }
