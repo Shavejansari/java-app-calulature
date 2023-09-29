@@ -51,12 +51,12 @@ pipeline {
                 script {
                     emailext (
                         subject: "Pipeline Status: ${currentBuild.result}",
-                        body: """<p>Your Jenkins pipeline has completed with the following status: ${currentBuild.result}</p>""",
+                        body: """Your Jenkins pipeline has completed with the following status: ${currentBuild.result}""",
                         to: 'shavejmohd30@gmail.com', // Replace with the email address of the recipient
                         cc: 'anoopsinghj73@gmail.com', // Optional: CC addresses
                         // bcc: '', // Optional: BCC addresses
                         // replyTo: '', // Optional: Reply-To address
-                        // mimeType: 'text/html' // Set to 'text/plain' for plain text emails
+                        mimeType: 'text/html' // Set to 'text/plain' for plain text emails
                     )
                         
                 }
