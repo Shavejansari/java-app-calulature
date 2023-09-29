@@ -50,7 +50,7 @@ pipeline {
             steps {
                 script {
                     emailext(
-                    to: 'anoopsinghj73@gmail.com',
+                        to: 'shavejmohd30@gmail.com',
                         subject: 'Pipeline Status',
                         body: '''Hi Mohd,
                         Greetings of the day
